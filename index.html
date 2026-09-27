@@ -1,1 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrenchScan – Auto Memecoin Analyzer</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0b0e11;
+      color: #eaecef;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.5;
+      padding: 16px;
+    }
+    .header {
+      text-align: center;
+      padding: 24px 0 16px;
+      border-bottom: 1px solid #1e2329;
+      margin-bottom: 20px;
+    }
+    .header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #f0b90b;
+    }
+    .header p {
+      color: #848e9c;
+      font-size: 14px;
+      margin-top: 6px;
+    }
+    .card {
+      background: #1e2329;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      border: 1px solid #2b3139;
+    }
+    .coin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .coin-name {
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .risk {
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .risk.high { background: #f6465d33; color: #f6465d; }
+    .risk.medium { background: #f0b90b33; color: #f0b90b; }
+    .risk.low { background: #0ecb8133; color: #0ecb81; }
+    .info {
+      font-size: 13px;
+      color: #848e9c;
+      margin-bottom: 8px;
+    }
+    .summary {
+      background: #0b0e11;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      margin-top: 12px;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .tag {
+      background: #2b3139;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+    }
+    .tag.vamp { background: #f6465d33; color: #f6465d; }
+    .footer {
+      text-align: center;
+      color: #5e6673;
+      font-size: 12px;
+      margin-top: 40px;
+      padding-bottom: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>TrenchScan</h1>
+    <p>Auto-analyzing new memecoins • No CA needed</p>
+  </div>
 
+  <!-- Example Coin Card 1 -->
+  <div class="card">
+    <div class="coin-header">
+      <div class="coin-name">ExamplePepe • $EXPEPE</div>
+      <div class="risk high">HIGH RISK</div>
+    </div>
+    <div class="info">Age: 8 minutes • MC: $14.2k • Liq: $9.1k</div>
+    <div class="tags">
+      <span class="tag">Mint Enabled</span>
+      <span class="tag">Top10 67%</span>
+      <span class="tag vamp">Possible Vamp</span>
+    </div>
+    <div class="summary">
+      High risk. Mint authority still active. Top 10 wallets hold 67%. Name is very similar to a recent runner. Socials look new.
+    </div>
+  </div>
+
+  <!-- Example Coin Card 2 -->
+  <div class="card">
+    <div class="coin-header">
+      <div class="coin-name">MoonDog • $MDOG</div>
+      <div class="risk medium">MEDIUM</div>
+    </div>
+    <div class="info">Age: 22 minutes • MC: $31.5k • Liq: $18.4k</div>
+    <div class="tags">
+      <span class="tag">LP Locked</span>
+      <span class="tag">Mint Renounced</span>
+      <span class="tag">Top10 38%</span>
+    </div>
+    <div class="summary">
+      Medium risk. Liquidity locked and mint renounced. Holder distribution is okay. No strong vampire signals detected.
+    </div>
+  </div>
+
+  <!-- Example Coin Card 3 -->
+  <div class="card">
+    <div class="coin-header">
+      <div class="coin-name">SafeCat • $SCAT</div>
+      <div class="risk low">LOW RISK</div>
+    </div>
+    <div class="info">Age: 41 minutes • MC: $67.8k • Liq: $42.1k</div>
+    <div class="tags">
+      <span class="tag">LP Burned</span>
+      <span class="tag">Mint Renounced</span>
+      <span class="tag">Top10 29%</span>
+    </div>
+    <div class="summary">
+      Lower risk profile. LP burned, mint renounced, and holder distribution looks healthier than average.
+    </div>
+  </div>
+
+  <div class="footer">
+    TrenchScan • Auto memecoin analysis • Coming soon with live data
+  </div>
+</body>
+  </html>
