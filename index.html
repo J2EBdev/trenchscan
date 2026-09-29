@@ -63,7 +63,7 @@
       object-fit: cover;
     }
     .coin-name {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 600;
     }
     .coin-symbol {
@@ -76,24 +76,13 @@
       font-size: 11px;
       font-weight: 600;
       white-space: nowrap;
+      background: #2b3139;
+      color: #848e9c;
     }
-    .risk.unknown { background: #2b3139; color: #848e9c; }
     .info {
       font-size: 12px;
       color: #848e9c;
-      margin-bottom: 8px;
-    }
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
       margin-bottom: 10px;
-    }
-    .tag {
-      background: #2b3139;
-      padding: 2px 7px;
-      border-radius: 6px;
-      font-size: 11px;
     }
     .buttons {
       display: flex;
@@ -120,11 +109,6 @@
       font-size: 12px;
       margin-top: 30px;
     }
-    .loading {
-      text-align: center;
-      padding: 40px 0;
-      color: #848e9c;
-    }
   </style>
 </head>
 <body>
@@ -133,11 +117,11 @@
     <p>Auto-analyzing new memecoins • No CA needed</p>
   </div>
 
-  <div class="status" id="status">Loading real data from DexScreener...</div>
+  <div class="status" id="status">Loading real data...</div>
   <div id="feed"></div>
 
   <div class="footer">
-    TrenchScan • Real data from DexScreener • More features coming soon
+    TrenchScan • Real data from DexScreener
   </div>
 
   <script>
@@ -146,65 +130,67 @@
       const status = document.getElementById('status');
 
       try {
-        // Fetch latest token profiles (free public API)
         const res = await fetch('https://api.dexscreener.com/token-profiles/latest/v1');
         const data = await res.json();
 
-        // Filter only Solana tokens
-        const solanaTokens = data.filter(t => t.chainId === 'solana').slice(0, 15);
+        const solanaTokens = data.filter(function(t) {
+          return t.chainId === 'solana';
+        }).slice(0, 12);
 
         if (solanaTokens.length === 0) {
-          status.textContent = 'No new Solana tokens found right now. Try refreshing.';
+          status.textContent = 'No Solana tokens found right now. Refresh in a minute.';
           return;
         }
 
-        status.textContent = `Showing ${solanaTokens.length} latest Solana tokens • Updated just now`;
+        status.textContent = 'Showing ' + solanaTokens.length + ' latest Solana tokens';
 
         feed.innerHTML = '';
 
-        solanaTokens.forEach(token => {
-          const address = token.tokenAddress;
-          const name = token.description ? token.description.slice(0, 30) : 'Unknown';
-          const icon = token.icon || '';
-          const url = token.url || `https://dexscreener.com/solana/${address}`;
+        solanaTokens.forEach(function(token) {
+          var address = token.tokenAddress || '';
+          var name = 'New Token';
+          if (token.description) {
+            name = token.description.substring(0, 28);
+          } else if (token.url) {
+            name = 'Token ' + address.slice(0, 4);
+          }
 
-          const card = document.createElement('div');
+          var shortAddr = address.slice(0, 6) + '...' + address.slice(-4);
+          var iconHtml = '';
+          if (token.icon) {
+            iconHtml = '<img src="' + token.icon + '" class="coin-img" onerror="this.style.display=\'none\'">';
+          }
+
+          var card = document.createElement('div');
           card.className = 'card';
-          card.innerHTML = `
-            <div class="coin-header">
-              <div class="coin-left">
-                \( {icon ? `<img src=" \){icon}" class="coin-img" onerror="this.style.display='none'">` : ''}
-                <div>
-                  <div class="coin-name">${name}</div>
-                  <div class="coin-symbol">\( {address.slice(0,6)}... \){address.slice(-4)}</div>
-                </div>
-              </div>
-              <div class="risk unknown">NEW</div>
-            </div>
-            <div class="info">Solana • Just listed / updated</div>
-            <div class="tags">
-              <span class="tag">Real Data</span>
-              <span class="tag">DexScreener</span>
-            </div>
-            <div class="buttons">
-              <a class="btn btn-jupiter" href="https://jup.ag/swap/SOL-${address}" target="_blank">Jupiter</a>
-              <a class="btn btn-dex" href="https://dexscreener.com/solana/${address}" target="_blank">DexScreener</a>
-              <a class="btn btn-gmgn" href="https://gmgn.ai/sol/token/${address}" target="_blank">GMGN</a>
-            </div>
-          `;
+          card.innerHTML = 
+            '<div class="coin-header">' +
+              '<div class="coin-left">' +
+                iconHtml +
+                '<div>' +
+                  '<div class="coin-name">' + name + '</div>' +
+                  '<div class="coin-symbol">' + shortAddr + '</div>' +
+                '</div>' +
+              '</div>' +
+              '<div class="risk">NEW</div>' +
+            '</div>' +
+            '<div class="info">Solana • Just listed / updated</div>' +
+            '<div class="buttons">' +
+              '<a class="btn btn-jupiter" href="https://jup.ag/swap/SOL-' + address + '" target="_blank">Jupiter</a>' +
+              '<a class="btn btn-dex" href="https://dexscreener.com/solana/' + address + '" target="_blank">DexScreener</a>' +
+              '<a class="btn btn-gmgn" href="https://gmgn.ai/sol/token/' + address + '" target="_blank">GMGN</a>' +
+            '</div>';
+
           feed.appendChild(card);
         });
 
       } catch (err) {
-        status.textContent = 'Failed to load data. Please refresh the page.';
+        status.textContent = 'Error loading data. Please refresh.';
         console.error(err);
       }
     }
 
-    // Load when page opens
     loadCoins();
-
-    // Auto refresh every 60 seconds
     setInterval(loadCoins, 60000);
   </script>
 </body>
