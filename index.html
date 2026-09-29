@@ -130,7 +130,11 @@
       const status = document.getElementById('status');
 
       try {
-        const res = await fetch('https://api.dexscreener.com/token-profiles/latest/v1');
+        // Using a free CORS proxy so the browser can load the data
+        const proxy = 'https://corsproxy.io/?';
+        const apiUrl = 'https://api.dexscreener.com/token-profiles/latest/v1';
+        
+        const res = await fetch(proxy + encodeURIComponent(apiUrl));
         const data = await res.json();
 
         const solanaTokens = data.filter(function(t) {
@@ -138,7 +142,7 @@
         }).slice(0, 12);
 
         if (solanaTokens.length === 0) {
-          status.textContent = 'No Solana tokens found right now. Refresh in a minute.';
+          status.textContent = 'No Solana tokens found right now. Try again in a minute.';
           return;
         }
 
@@ -151,7 +155,7 @@
           var name = 'New Token';
           if (token.description) {
             name = token.description.substring(0, 28);
-          } else if (token.url) {
+          } else {
             name = 'Token ' + address.slice(0, 4);
           }
 
@@ -185,13 +189,13 @@
         });
 
       } catch (err) {
-        status.textContent = 'Error loading data. Please refresh.';
+        status.textContent = 'Error loading data. Please refresh in a few seconds.';
         console.error(err);
       }
     }
 
     loadCoins();
-    setInterval(loadCoins, 60000);
+    setInterval(loadCoins, 90000);
   </script>
 </body>
   </html>
