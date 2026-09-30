@@ -10,136 +10,169 @@
       background: #0b0e11;
       color: #eaecef;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      line-height: 1.6;
+      line-height: 1.5;
+      padding: 20px 16px 60px;
     }
-    .container {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 40px 20px;
-    }
-    .logo {
+    .header {
       text-align: center;
-      margin-bottom: 12px;
-    }
-    .logo h1 {
-      font-size: 36px;
-      font-weight: 800;
-      color: #f0b90b;
-      letter-spacing: -0.5px;
-    }
-    .tagline {
-      text-align: center;
-      color: #848e9c;
-      font-size: 16px;
-      margin-bottom: 40px;
-    }
-    .card {
-      background: #1e2329;
-      border: 1px solid #2b3139;
-      border-radius: 16px;
-      padding: 28px 24px;
       margin-bottom: 24px;
     }
-    .card h2 {
-      font-size: 20px;
-      margin-bottom: 14px;
+    .header h1 {
+      font-size: 28px;
+      font-weight: 800;
       color: #f0b90b;
     }
-    .card p {
-      color: #c0c5ce;
-      font-size: 15px;
-      margin-bottom: 12px;
-    }
-    .features {
-      list-style: none;
-      margin-top: 16px;
-    }
-    .features li {
-      padding: 10px 0;
-      border-bottom: 1px solid #2b3139;
-      font-size: 15px;
-      color: #eaecef;
-    }
-    .features li:last-child {
-      border-bottom: none;
-    }
-    .features li span {
-      color: #f0b90b;
-      margin-right: 8px;
-    }
-    .status-box {
-      background: #161a1e;
-      border-radius: 12px;
-      padding: 20px;
-      text-align: center;
-      margin-top: 30px;
-      border: 1px dashed #2b3139;
-    }
-    .status-box p {
+    .header p {
       color: #848e9c;
       font-size: 14px;
+      margin-top: 6px;
     }
+    .section {
+      background: #1e2329;
+      border: 1px solid #2b3139;
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 20px;
+    }
+    .section h2 {
+      font-size: 16px;
+      color: #f0b90b;
+      margin-bottom: 10px;
+    }
+    .section p {
+      font-size: 14px;
+      color: #c0c5ce;
+      margin-bottom: 8px;
+    }
+    .status {
+      text-align: center;
+      color: #848e9c;
+      font-size: 13px;
+      margin: 20px 0 12px;
+    }
+    .card {
+      background: #161a1e;
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 12px;
+      border: 1px solid #2b3139;
+    }
+    .coin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .coin-name {
+      font-size: 15px;
+      font-weight: 600;
+    }
+    .coin-address {
+      font-size: 12px;
+      color: #848e9c;
+    }
+    .risk {
+      background: #2b3139;
+      color: #848e9c;
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+    .buttons {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .btn {
+      flex: 1;
+      text-align: center;
+      padding: 8px 4px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      color: white;
+    }
+    .btn-jupiter { background: #00d18c; }
+    .btn-dex { background: #3861fb; }
+    .btn-gmgn { background: #f0b90b; color: #0b0e11; }
     .footer {
       text-align: center;
       color: #5e6673;
-      font-size: 13px;
-      margin-top: 50px;
-      padding-bottom: 40px;
+      font-size: 12px;
+      margin-top: 40px;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="logo">
-      <h1>TrenchScan</h1>
-    </div>
-    <p class="tagline">Auto-analyzing new memecoins so trenchers can move faster</p>
-
-    <div class="card">
-      <h2>The Problem</h2>
-      <p>Every time a new memecoin launches, trenchers have to:</p>
-      <ul class="features">
-        <li><span>•</span> Find and copy the Contract Address</li>
-        <li><span>•</span> Open multiple websites</li>
-        <li><span>•</span> Check deployer history, holders, liquidity, socials</li>
-        <li><span>•</span> Look for rug signals and vampire coins</li>
-      </ul>
-      <p style="margin-top: 16px;">This takes time. In memecoins, speed is everything.</p>
-    </div>
-
-    <div class="card">
-      <h2>The Solution</h2>
-      <p>TrenchScan automatically analyzes new coins in the background.</p>
-      <p>You don’t need to paste any Contract Address. Just open the site and the analysis is already done.</p>
-    </div>
-
-    <div class="card">
-      <h2>What It Will Show</h2>
-      <ul class="features">
-        <li><span>✓</span> Risk Score (Low / Medium / High / Extreme)</li>
-        <li><span>✓</span> Vampire coin detection</li>
-        <li><span>✓</span> Deployer / Dev history</li>
-        <li><span>✓</span> Holder distribution & top wallets</li>
-        <li><span>✓</span> Liquidity status (locked / burned)</li>
-        <li><span>✓</span> Linked socials (Twitter, Telegram, Website)</li>
-        <li><span>✓</span> Short AI summary in plain English</li>
-        <li><span>✓</span> One-click links to Jupiter, GMGN, Axiom, etc.</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h2>Vision</h2>
-      <p>A fast tool built for real trenchers. No complicated dashboard. Just clear signals so you can decide quicker than the crowd.</p>
-    </div>
-
-    <div class="status-box">
-      <p><strong>Current Status</strong></p>
-      <p style="margin-top: 8px;">Landing page live • Core product in development<br>Live auto-scan coming soon</p>
-    </div>
-
-    <div class="footer">
-      TrenchScan • Built for speed
-    </div>
+  <div class="header">
+    <h1>TrenchScan</h1>
+    <p>Auto-analyzing new memecoins so trenchers can move faster</p>
   </div>
+
+  <div class="section">
+    <h2>What is TrenchScan?</h2>
+    <p>It automatically checks new memecoins in the background (risk, vampire coins, deployer, holders, socials) so you don’t have to paste Contract Addresses and open many tabs.</p>
+  </div>
+
+  <div class="status" id="status">Loading latest Solana tokens...</div>
+  <div id="feed"></div>
+
+  <div class="footer">
+    TrenchScan • Built for speed
+  </div>
+
+  <script>
+    async function loadCoins() {
+      const feed = document.getElementById('feed');
+      const status = document.getElementById('status');
+
+      try {
+        const res = await fetch('/.netlify/functions/get-tokens');
+        const data = await res.json();
+
+        if (!Array.isArray(data) || data.length === 0) {
+          status.textContent = 'No tokens found right now. Try refreshing.';
+          return;
+        }
+
+        status.textContent = 'Showing ' + data.length + ' latest Solana tokens';
+
+        feed.innerHTML = '';
+
+        data.forEach(function(token) {
+          var address = token.tokenAddress || '';
+          var name = token.description ? token.description.substring(0, 30) : 'New Token';
+          var shortAddr = address.slice(0, 6) + '...' + address.slice(-4);
+
+          var card = document.createElement('div');
+          card.className = 'card';
+          card.innerHTML = 
+            '<div class="coin-header">' +
+              '<div>' +
+                '<div class="coin-name">' + name + '</div>' +
+                '<div class="coin-address">' + shortAddr + '</div>' +
+              '</div>' +
+              '<div class="risk">NEW</div>' +
+            '</div>' +
+            '<div class="buttons">' +
+              '<a class="btn btn-jupiter" href="https://jup.ag/swap/SOL-' + address + '" target="_blank">Jupiter</a>' +
+              '<a class="btn btn-dex" href="https://dexscreener.com/solana/' + address + '" target="_blank">DexScreener</a>' +
+              '<a class="btn btn-gmgn" href="https://gmgn.ai/sol/token/' + address + '" target="_blank">GMGN</a>' +
+            '</div>';
+
+          feed.appendChild(card);
+        });
+
+      } catch (err) {
+        status.textContent = 'Error loading data. Please try again later.';
+        console.error(err);
+      }
+    }
+
+    loadCoins();
+    setInterval(loadCoins, 90000);
+  </script>
 </body>
-</html>
+  </html>
