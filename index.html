@@ -10,192 +10,136 @@
       background: #0b0e11;
       color: #eaecef;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      line-height: 1.5;
-      padding: 16px;
-      padding-bottom: 60px;
+      line-height: 1.6;
     }
-    .header {
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    .logo {
       text-align: center;
-      padding: 20px 0 16px;
-      border-bottom: 1px solid #1e2329;
-      margin-bottom: 20px;
+      margin-bottom: 12px;
     }
-    .header h1 {
-      font-size: 26px;
-      font-weight: 700;
+    .logo h1 {
+      font-size: 36px;
+      font-weight: 800;
       color: #f0b90b;
+      letter-spacing: -0.5px;
     }
-    .header p {
-      color: #848e9c;
-      font-size: 13px;
-      margin-top: 4px;
-    }
-    .status {
+    .tagline {
       text-align: center;
       color: #848e9c;
-      font-size: 13px;
-      margin-bottom: 16px;
+      font-size: 16px;
+      margin-bottom: 40px;
     }
     .card {
       background: #1e2329;
-      border-radius: 12px;
-      padding: 14px;
-      margin-bottom: 14px;
       border: 1px solid #2b3139;
+      border-radius: 16px;
+      padding: 28px 24px;
+      margin-bottom: 24px;
     }
-    .coin-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px;
-      gap: 8px;
+    .card h2 {
+      font-size: 20px;
+      margin-bottom: 14px;
+      color: #f0b90b;
     }
-    .coin-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .coin-img {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: #2b3139;
-      object-fit: cover;
-    }
-    .coin-name {
+    .card p {
+      color: #c0c5ce;
       font-size: 15px;
-      font-weight: 600;
+      margin-bottom: 12px;
     }
-    .coin-symbol {
-      font-size: 12px;
-      color: #848e9c;
+    .features {
+      list-style: none;
+      margin-top: 16px;
     }
-    .risk {
-      padding: 3px 9px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 600;
-      white-space: nowrap;
-      background: #2b3139;
-      color: #848e9c;
+    .features li {
+      padding: 10px 0;
+      border-bottom: 1px solid #2b3139;
+      font-size: 15px;
+      color: #eaecef;
     }
-    .info {
-      font-size: 12px;
-      color: #848e9c;
-      margin-bottom: 10px;
+    .features li:last-child {
+      border-bottom: none;
     }
-    .buttons {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
+    .features li span {
+      color: #f0b90b;
+      margin-right: 8px;
     }
-    .btn {
-      flex: 1;
-      min-width: 90px;
+    .status-box {
+      background: #161a1e;
+      border-radius: 12px;
+      padding: 20px;
       text-align: center;
-      padding: 8px 6px;
-      border-radius: 8px;
-      font-size: 12px;
-      font-weight: 600;
-      text-decoration: none;
-      color: white;
+      margin-top: 30px;
+      border: 1px dashed #2b3139;
     }
-    .btn-jupiter { background: #00d18c; }
-    .btn-dex { background: #3861fb; }
-    .btn-gmgn { background: #f0b90b; color: #0b0e11; }
+    .status-box p {
+      color: #848e9c;
+      font-size: 14px;
+    }
     .footer {
       text-align: center;
       color: #5e6673;
-      font-size: 12px;
-      margin-top: 30px;
+      font-size: 13px;
+      margin-top: 50px;
+      padding-bottom: 40px;
     }
   </style>
 </head>
 <body>
-  <div class="header">
-    <h1>TrenchScan</h1>
-    <p>Auto-analyzing new memecoins • No CA needed</p>
+  <div class="container">
+    <div class="logo">
+      <h1>TrenchScan</h1>
+    </div>
+    <p class="tagline">Auto-analyzing new memecoins so trenchers can move faster</p>
+
+    <div class="card">
+      <h2>The Problem</h2>
+      <p>Every time a new memecoin launches, trenchers have to:</p>
+      <ul class="features">
+        <li><span>•</span> Find and copy the Contract Address</li>
+        <li><span>•</span> Open multiple websites</li>
+        <li><span>•</span> Check deployer history, holders, liquidity, socials</li>
+        <li><span>•</span> Look for rug signals and vampire coins</li>
+      </ul>
+      <p style="margin-top: 16px;">This takes time. In memecoins, speed is everything.</p>
+    </div>
+
+    <div class="card">
+      <h2>The Solution</h2>
+      <p>TrenchScan automatically analyzes new coins in the background.</p>
+      <p>You don’t need to paste any Contract Address. Just open the site and the analysis is already done.</p>
+    </div>
+
+    <div class="card">
+      <h2>What It Will Show</h2>
+      <ul class="features">
+        <li><span>✓</span> Risk Score (Low / Medium / High / Extreme)</li>
+        <li><span>✓</span> Vampire coin detection</li>
+        <li><span>✓</span> Deployer / Dev history</li>
+        <li><span>✓</span> Holder distribution & top wallets</li>
+        <li><span>✓</span> Liquidity status (locked / burned)</li>
+        <li><span>✓</span> Linked socials (Twitter, Telegram, Website)</li>
+        <li><span>✓</span> Short AI summary in plain English</li>
+        <li><span>✓</span> One-click links to Jupiter, GMGN, Axiom, etc.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Vision</h2>
+      <p>A fast tool built for real trenchers. No complicated dashboard. Just clear signals so you can decide quicker than the crowd.</p>
+    </div>
+
+    <div class="status-box">
+      <p><strong>Current Status</strong></p>
+      <p style="margin-top: 8px;">Landing page live • Core product in development<br>Live auto-scan coming soon</p>
+    </div>
+
+    <div class="footer">
+      TrenchScan • Built for speed
+    </div>
   </div>
-
-  <div class="status" id="status">Loading real data...</div>
-  <div id="feed"></div>
-
-  <div class="footer">
-    TrenchScan • Real data from DexScreener
-  </div>
-
-  <script>
-    async function loadCoins() {
-      const feed = document.getElementById('feed');
-      const status = document.getElementById('status');
-
-      try {
-        // Using a free CORS proxy so the browser can load the data
-        const proxy = 'https://corsproxy.io/?';
-        const apiUrl = 'https://api.dexscreener.com/token-profiles/latest/v1';
-        
-        const res = await fetch(proxy + encodeURIComponent(apiUrl));
-        const data = await res.json();
-
-        const solanaTokens = data.filter(function(t) {
-          return t.chainId === 'solana';
-        }).slice(0, 12);
-
-        if (solanaTokens.length === 0) {
-          status.textContent = 'No Solana tokens found right now. Try again in a minute.';
-          return;
-        }
-
-        status.textContent = 'Showing ' + solanaTokens.length + ' latest Solana tokens';
-
-        feed.innerHTML = '';
-
-        solanaTokens.forEach(function(token) {
-          var address = token.tokenAddress || '';
-          var name = 'New Token';
-          if (token.description) {
-            name = token.description.substring(0, 28);
-          } else {
-            name = 'Token ' + address.slice(0, 4);
-          }
-
-          var shortAddr = address.slice(0, 6) + '...' + address.slice(-4);
-          var iconHtml = '';
-          if (token.icon) {
-            iconHtml = '<img src="' + token.icon + '" class="coin-img" onerror="this.style.display=\'none\'">';
-          }
-
-          var card = document.createElement('div');
-          card.className = 'card';
-          card.innerHTML = 
-            '<div class="coin-header">' +
-              '<div class="coin-left">' +
-                iconHtml +
-                '<div>' +
-                  '<div class="coin-name">' + name + '</div>' +
-                  '<div class="coin-symbol">' + shortAddr + '</div>' +
-                '</div>' +
-              '</div>' +
-              '<div class="risk">NEW</div>' +
-            '</div>' +
-            '<div class="info">Solana • Just listed / updated</div>' +
-            '<div class="buttons">' +
-              '<a class="btn btn-jupiter" href="https://jup.ag/swap/SOL-' + address + '" target="_blank">Jupiter</a>' +
-              '<a class="btn btn-dex" href="https://dexscreener.com/solana/' + address + '" target="_blank">DexScreener</a>' +
-              '<a class="btn btn-gmgn" href="https://gmgn.ai/sol/token/' + address + '" target="_blank">GMGN</a>' +
-            '</div>';
-
-          feed.appendChild(card);
-        });
-
-      } catch (err) {
-        status.textContent = 'Error loading data. Please refresh in a few seconds.';
-        console.error(err);
-      }
-    }
-
-    loadCoins();
-    setInterval(loadCoins, 90000);
-  </script>
 </body>
-  </html>
+</html>
