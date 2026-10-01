@@ -98,7 +98,7 @@
     .info-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 8px;
       font-size: 12px;
       color: #848e9c;
       margin-bottom: 12px;
@@ -152,27 +152,28 @@
   <script>
     function formatNumber(num) {
       if (!num) return '—';
+      num = Number(num);
       if (num >= 1000000) return '$' + (num / 1000000).toFixed(1) + 'M';
       if (num >= 1000) return '$' + (num / 1000).toFixed(1) + 'K';
-      return '$' + Number(num).toFixed(0);
+      return '$' + num.toFixed(0);
     }
 
     function getAge(createdAt) {
       if (!createdAt) return null;
-      const minutes = Math.floor((Date.now() - createdAt) / 60000);
+      var minutes = Math.floor((Date.now() - createdAt) / 60000);
       if (minutes < 60) return minutes + 'm ago';
-      const hours = Math.floor(minutes / 60);
+      var hours = Math.floor(minutes / 60);
       if (hours < 24) return hours + 'h ago';
       return Math.floor(hours / 24) + 'd ago';
     }
 
     async function loadCoins() {
-      const feed = document.getElementById('feed');
-      const status = document.getElementById('status');
+      var feed = document.getElementById('feed');
+      var status = document.getElementById('status');
 
       try {
-        const res = await fetch('/.netlify/functions/get-tokens');
-        const data = await res.json();
+        var res = await fetch('/.netlify/functions/get-tokens');
+        var data = await res.json();
 
         if (!Array.isArray(data) || data.length === 0) {
           status.textContent = 'No tokens found right now. Try refreshing.';
@@ -180,44 +181,48 @@
         }
 
         status.textContent = 'Showing ' + data.length + ' latest Solana tokens';
-
         feed.innerHTML = '';
 
         data.forEach(function(token) {
-          const age = getAge(token.createdAt);
-          const isVeryNew = age && age.includes('m') && parseInt(age) < 30;
+          var age = getAge(token.createdAt);
+          var isVeryNew = age && age.indexOf('m') > -1 && parseInt(age) < 30;
+          var riskClass = isVeryNew ? 'hot' : 'new';
+          var riskText = isVeryNew ? 'VERY NEW' : 'NEW';
 
-          const card = document.createElement('div');
+          var shortAddr = token.address ? token.address.slice(0,6) + '...' + token.address.slice(-4) : '';
+          var name = token.name || 'Unknown';
+          var symbol = token.symbol || '???';
+
+          var iconHtml = '';
+          if (token.icon) {
+            iconHtml = '<img src="' + token.icon + '" class="coin-img" onerror="this.style.display=\'none\'">';
+          } else {
+            iconHtml = '<div class="coin-img"></div>';
+          }
+
+          var ageHtml = age ? '<span>' + age + '</span>' : '';
+          var liqHtml = '<span>Liq: ' + formatNumber(token.liquidity) + '</span>';
+          var mcHtml = '<span>MC: ' + formatNumber(token.marketCap) + '</span>';
+
+          var card = document.createElement('div');
           card.className = 'card';
-
-          const iconHtml = token.icon 
-            ? '<img src="' + token.icon + '" class="coin-img" onerror="this.style.display=\'none\'">' 
-            : '<div class="coin-img"></div>';
-
-          card.innerHTML = `
-            <div class="card-top">
-              <div class="coin-left">
-                ${iconHtml}
-                <div>
-                  <div class="coin-name">${token.name || 'Unknown'}</div>
-                  <div class="coin-symbol">$${token.symbol || '???'} • \( {token.address.slice(0,6)}... \){token.address.slice(-4)}</div>
-                </div>
-              </div>
-              <div class="risk \( {isVeryNew ? 'hot' : 'new'}"> \){isVeryNew ? 'VERY NEW' : 'NEW'}</div>
-            </div>
-
-            <div class="info-row">
-              ${age ? '<span>' + age + '</span>' : ''}
-              <span>Liq: ${formatNumber(token.liquidity)}</span>
-              <span>MC: ${formatNumber(token.marketCap)}</span>
-            </div>
-
-            <div class="buttons">
-              <a class="btn btn-jupiter" href="https://jup.ag/swap/SOL-${token.address}" target="_blank">Jupiter</a>
-              <a class="btn btn-dex" href="https://dexscreener.com/solana/${token.address}" target="_blank">DexScreener</a>
-              <a class="btn btn-gmgn" href="https://gmgn.ai/sol/token/${token.address}" target="_blank">GMGN</a>
-            </div>
-          `;
+          card.innerHTML = 
+            '<div class="card-top">' +
+              '<div class="coin-left">' +
+                iconHtml +
+                '<div>' +
+                  '<div class="coin-name">' + name + '</div>' +
+                  '<div class="coin-symbol">$' + symbol + ' • ' + shortAddr + '</div>' +
+                '</div>' +
+              '</div>' +
+              '<div class="risk ' + riskClass + '">' + riskText + '</div>' +
+            '</div>' +
+            '<div class="info-row">' + ageHtml + liqHtml + mcHtml + '</div>' +
+            '<div class="buttons">' +
+              '<a class="btn btn-jupiter" href="https://jup.ag/swap/SOL-' + token.address + '" target="_blank">Jupiter</a>' +
+              '<a class="btn btn-dex" href="https://dexscreener.com/solana/' + token.address + '" target="_blank">DexScreener</a>' +
+              '<a class="btn btn-gmgn" href="https://gmgn.ai/sol/token/' + token.address + '" target="_blank">GMGN</a>' +
+            '</div>';
 
           feed.appendChild(card);
         });
