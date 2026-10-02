@@ -15,7 +15,7 @@
     }
     .header {
       text-align: center;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
     .header h1 {
       font-size: 26px;
@@ -25,36 +25,35 @@
     .header p {
       color: #848e9c;
       font-size: 13px;
-      margin-top: 5px;
+      margin-top: 4px;
     }
     .section {
       background: #1e2329;
       border: 1px solid #2b3139;
       border-radius: 14px;
-      padding: 16px;
-      margin-bottom: 18px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
     }
     .section h2 {
-      font-size: 15px;
+      font-size: 14px;
       color: #f0b90b;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
     .section p {
       font-size: 13px;
       color: #c0c5ce;
-      margin-bottom: 6px;
     }
     .status {
       text-align: center;
       color: #848e9c;
       font-size: 13px;
-      margin: 14px 0 12px;
+      margin: 12px 0;
     }
     .card {
       background: #161a1e;
       border-radius: 14px;
       padding: 14px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       border: 1px solid #2b3139;
     }
     .card-top {
@@ -113,7 +112,7 @@
       gap: 6px;
       font-size: 11px;
       color: #848e9c;
-      margin-bottom: 12px;
+      margin-bottom: 11px;
     }
     .info-row span {
       background: #1e2329;
@@ -124,7 +123,6 @@
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       gap: 6px;
-      margin-bottom: 8px;
     }
     .btn {
       text-align: center;
@@ -150,6 +148,7 @@
       font-size: 12px;
       font-weight: 600;
       cursor: pointer;
+      grid-column: span 3;
     }
     .footer {
       text-align: center;
@@ -162,13 +161,12 @@
 <body>
   <div class="header">
     <h1>TrenchScan</h1>
-    <p>Auto-analyzing new memecoins so trenchers can move faster</p>
+    <p>Auto-analyzing new memecoins • Faster decisions</p>
   </div>
 
   <div class="section">
     <h2>What is TrenchScan?</h2>
-    <p>It automatically analyzes new memecoins in the background (age, liquidity, market cap, basic risk signals) so you don’t have to paste Contract Addresses and open multiple tabs.</p>
-    <p>Built for speed. One click to trade.</p>
+    <p>Automatically analyzes new memecoins (age, liquidity, market cap, basic risk) so you don’t waste time pasting CAs and checking multiple sites.</p>
   </div>
 
   <div class="status" id="status">Loading latest tokens...</div>
@@ -211,18 +209,19 @@
         var data = await res.json();
 
         if (!Array.isArray(data) || data.length === 0) {
-          status.textContent = 'No tokens found right now. Try refreshing.';
+          status.textContent = 'No tokens found right now...';
           return;
         }
 
-        status.textContent = 'Showing ' + data.length + ' latest Solana tokens';
+        status.textContent = 'Showing ' + data.length + ' latest Solana tokens • Auto-refreshing';
+
         feed.innerHTML = '';
 
         data.forEach(function(token) {
           var age = getAge(token.createdAt);
           var minutes = token.createdAt ? Math.floor((Date.now() - token.createdAt) / 60000) : 999;
-          var isVeryNew = minutes < 25;
-          var lowLiq = token.liquidity && token.liquidity < 5000;
+          var isVeryNew = minutes < 20;
+          var lowLiq = token.liquidity && token.liquidity < 8000;
 
           var badges = '';
           if (isVeryNew) badges += '<div class="badge hot">VERY NEW</div>';
@@ -237,9 +236,8 @@
             ? '<img src="' + token.icon + '" class="coin-img" onerror="this.style.display=\'none\'">' 
             : '<div class="coin-img"></div>';
 
-          var ageText = age ? age + ' ago' : '';
           var infoHtml = '';
-          if (ageText) infoHtml += '<span>' + ageText + '</span>';
+          if (age) infoHtml += '<span>' + age + ' ago</span>';
           infoHtml += '<span>Liq: ' + formatNumber(token.liquidity) + '</span>';
           infoHtml += '<span>MC: ' + formatNumber(token.marketCap) + '</span>';
 
@@ -270,13 +268,16 @@
         });
 
       } catch (err) {
-        status.textContent = 'Error loading data. Please try again later.';
+        status.textContent = 'Error loading data. Retrying...';
         console.error(err);
       }
     }
 
+    // Load immediately
     loadCoins();
-    setInterval(loadCoins, 90000);
+
+    // Refresh every 18 seconds (much faster)
+    setInterval(loadCoins, 18000);
   </script>
 </body>
-</html>
+  </html>
